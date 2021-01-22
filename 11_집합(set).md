@@ -19,26 +19,38 @@
   * 리스트 포함 불가
   * 튜플 포함 가능
 
-  ```python
-  # 집합에 요소 추가(add, update 함수)
-  s = {1, 2, 3}
-  s.add(4) # 1개 추가시
-  print(s)
-  
-  s.update([5, 6]) # 여러개 추가시
-  print(s)
-  ```
+### 집합 요소 추가 (add, update)
 
-  ```python
-  # 집합에서 요소 삭제
-  s.remove(3)
-  s.discard(5)
-  print(s)
-  
-  # 없는 요소 삭제시
-  # s.remove(10) # KeyError: 10
-  s.discard(10)
-  ```
+``` python
+s = {1 ,2 ,3}
+s.add(4) # {1, 2, 3, 4}
+
+# 여러 요소 추가시
+s.update([5, 6]) # {1, 2, 3, 4, 5, 6} 
+```
+
+### 집합 요소 삭제 (remove, discard, del)
+
+```python
+# 집합에서 요소 삭제
+s.remove(3)
+s.discard(5)
+print(s)
+
+# 없는 요소 삭제시
+s.remove(10) # KeyError: 10 에러 발생
+s.discard(10)
+
+# 전체 요소 삭제
+s.clear()
+print(s) # set() : set의 구조는 그대로
+
+# 집합 자체 삭제
+# 메모리 공간에서 아예 지워버림
+del s
+```
+
+
 
 ## 집합 연산
 
