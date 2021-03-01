@@ -17,7 +17,7 @@ plot(1:10, late, type='l',lty=6,lwd=1)
 plot(diamonds$cut)
 ```
 
-<img src="C:%5CUsers%5Ckimih%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210302000303550.png" alt="image-20210302000303550" style="zoom:33%;" />
+<img src="md-images/image-20210302002138679.png" alt="image-20210302002138679" style="zoom:33%;" />
 
 ## 2. scatter plot (산점도)
 
@@ -32,7 +32,7 @@ plot(diamonds$cut)
 plot(mtcars$mpg,mtcars$hp, pch=3)
 ```
 
-<img src="md-images/image-20210302000615014.png" alt="image-20210302000615014" style="zoom:33%;" />
+<img src="md-images/image-20210302000615014.png" alt="image-20210302002138679" style="zoom:33%;" />
 
 ### 1) scatter plot matrix : 여러 개의 변수에 대해 동시에 산점도를 그리고 싶은 경우 사용
 
@@ -42,7 +42,7 @@ plot(mtcars$mpg,mtcars$hp, pch=3)
 pairs(iris[,1:4])
 ```
 
-<img src="md-images/image-20210302001251305.png" alt="image-20210302001251305" style="zoom:33%;" />
+<img src="md-images/image-20210302001251305.png" alt="image-20210302002138679" style="zoom:33%;" />
 
 
 
@@ -54,5 +54,5 @@ pairs(iris[,1:4])
 mosaicplot(~Class + Sex, data=Titanic)
 ```
 
-<img src="md-images/image-20210302001526131.png" alt="image-20210302001526131" style="zoom:33%;" />
+<img src="md-images/image-20210302001526131.png" alt="image-20210302002138679" style="zoom:33%;" />
 
