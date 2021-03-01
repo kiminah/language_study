@@ -44,3 +44,15 @@ pairs(iris[,1:4])
 
 <img src="md-images/image-20210302001251305.png" alt="image-20210302001251305" style="zoom:33%;" />
 
+
+
+## 3. mosaic plot
+
+> 2원 3원 교차표의 시각화
+
+```R
+mosaicplot(~Class + Sex, data=Titanic)
+```
+
+<img src="md-images/image-20210302001526131.png" alt="image-20210302001526131" style="zoom:33%;" />
+
