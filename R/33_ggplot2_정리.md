@@ -47,7 +47,7 @@ options(scipen=-100) # x,y축 둘다 지수 표현
 options(scipen=0) # x축만 지수로 표현
 ```
 
-<img src="C:%5CUsers%5Ckimih%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311204621475.png" alt="image-20210311204621475" style="zoom: 50%;" />
+<img src="md-images/image-20210311204621475.png" alt="image-20210311204621475" style="zoom: 50%;" />
 
 ## 05. 막대그래프
 
@@ -77,7 +77,7 @@ df_mpg
 ggplot(data=df_mpg, aes(x=drv, y=mean_hwy)) + geom_col()
 ```
 
-<img src="C:%5CUsers%5Ckimih%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311205034844.png" alt="image-20210311205034844" style="zoom:50%;" />
+<img src="md-images/image-20210311205034844.png" alt="image-20210311205034844" style="zoom:50%;" />
 
 - 크기 순으로 정렬
 
@@ -89,7 +89,7 @@ ggplot(data=df_mpg, aes(x=drv, y=mean_hwy)) + geom_col()
    # 기준값이 양수면 오름차순
   ```
 
-  <img src="C:%5CUsers%5Ckimih%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311205401692.png" alt="image-20210311205401692" style="zoom:50%;" />
+  <img src="md-images/image-20210311205401692.png" alt="image-20210311205401692" style="zoom:50%;" />
 
 ### geom_bar()
 
@@ -115,7 +115,7 @@ ggplot(data=df_mpg, aes(x=drv, y=mean_hwy)) + geom_col()
   # 에러: geom_col requires the following missing aesthetics: y
   ```
 
-  <img src="C:%5CUsers%5Ckimih%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311205750656.png" alt="image-20210311205750656" style="zoom:50%;" />
+  <img src="md-images/image-20210311205750656.png" alt="image-20210311205750656" style="zoom:50%;" />
 
 - 연속 변수인 경우
 
@@ -125,7 +125,7 @@ ggplot(data=df_mpg, aes(x=drv, y=mean_hwy)) + geom_col()
   ggplot(dat=mpg, aes(x=hwy)) + geom_bar()
   ```
 
-  <img src="C:%5CUsers%5Ckimih%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311205734422.png" alt="image-20210311205734422" style="zoom:50%;" />
+  <img src="md-images/image-20210311205734422.png" alt="image-20210311205734422" style="zoom:50%;" />
 
 #### 1) stat 옵션
 
@@ -149,7 +149,7 @@ ggplot(data=diamonds, aes(cut)) + geom_bar(stat='identity')
 # 에러: geom_bar requires the following missing aesthetics: y
 ```
 
-<img src="C:%5CUsers%5Ckimih%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311210420821.png" alt="image-20210311210420821" style="zoom:50%;" />
+<img src="md-images/image-20210311210420821.png" alt="image-20210311210420821" style="zoom:50%;" />
 
 #### 2) position 옵션
 
@@ -168,9 +168,9 @@ ggplot(diamonds, aes(color, fill=cut)) +
   geom_bar(position='fill')
 ```
 
-<img src="C:%5CUsers%5Ckimih%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311210530137.png" alt="image-20210311210530137" style="zoom:50%;" />
+<img src="md-images/image-20210311210530137.png" alt="image-20210311210530137" style="zoom:50%;" />
 
-<img src="C:%5CUsers%5Ckimih%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20210311210559152.png" alt="image-20210311210559152" style="zoom:50%;" />
+<img src="md-images/image-20210311210559152.png" alt="image-20210311210559152" style="zoom:50%;" />
 
 #### 3) coor_flip() : 가로막대그래프
 
@@ -203,7 +203,7 @@ ggplot(sleep, aes(ID, extra, fill=group)) +
 ggplot(data=economixs, aes(data,psavert)) + geom_line()
 ```
 
-<img src="md-images/image-20210314205238877.png" alt="image-20210314205238877" style="zoom:50%;" />
+<img src="md-images/image-20210314205238877-1615724232185.png" alt="image-20210314205238877" style="zoom:50%;" />
 
 ### geom_baxplot()
 
