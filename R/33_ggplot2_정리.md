@@ -190,3 +190,96 @@ ggplot(sleep, aes(ID, extra, fill=group)) +
 
 
 
+### geom_line()
+
+- 선 그래프 -  시계열 그래프(Time Series Chart)
+- 데이터를 선으로 표현한 그래프
+- 시간에 따라 달라지는 데이터 표현
+- 일정 시간 간격을 두고 나열된 시계열 데이터를 선으로 표현한 그래프
+- 환율, 주가지수 등 경제 지표가 시간에 따라 어떻게 변하는지 표현할 때 활용
+
+```R
+# 시간에 따라서 개인 저축률 변화에 대한 그래프
+ggplot(data=economixs, aes(data,psavert)) + geom_line()
+```
+
+<img src="md-images/image-20210314205238877.png" alt="image-20210314205238877" style="zoom:50%;" />
+
+### geom_baxplot()
+
+- 데이터 분포(퍼져 있는 형태)를 직사각형 상자 모양으로 표현한 그래프
+- 집단 간 부높 차이 표현할 때 사용
+- 분포를 알 수 있기 때문에 평균만 볼 때보다 데이터의 특서을 좀 더 자세히 이해할 수 있음
+
+```R
+ggplot(mpt, aes(drv, hwy)) + geom_boxplot()
+```
+
+<img src="md-images/image-20210314205425562.png" alt="image-20210314205425562" style="zoom:50%;" />
+
+
+
+## 그래프 함수 주요 옵션
+
+### 색상/ 모양/ 크기 / 넓이
+
+- colour = "색상"
+
+- shape(pch) = 모양
+
+- size = 크기
+
+  ```R
+  ggplot(data=mpg, aes(x=displ, y=hwy)) +
+  	geom_point(color='red',
+                 shape=1,
+                 size=2)
+  ```
+
+  <img src="md-images/image-20210314205628747.png" alt="image-20210314205628747" style="zoom:50%;" />
+
+### fill
+
+- 도형에 색을 채워 줄 때 사용
+- fill 위치
+  - fill = 색상 : aes(), geom_bar() 안에 있어도 된다.
+  - 단, 색상 값이 아닌 변수 값을 그래프의 색상으로 결정하고자 한다면 aes() 함수 안에서 사용되어야 함
+
+```R
+# 전체 같은 색
+Orange %>%
+  group_by(Tree) %>% 
+  summarize(Sum.circumference = sum(circumference)) %>%
+  ggplot(aes(Tree, Sum.circumference)) + 
+  geom_bar(stat='identity', fill='red') 
+
+Orange %>%
+  group_by(Tree) %>% 
+  summarize(Sum.circumference = sum(circumference)) %>%
+  ggplot(aes(Tree, Sum.circumference, fill='red')) + 
+  geom_bar(stat='identity') 
+
+# Tree 종류별로 색상 분류
+Orange %>%
+  group_by(Tree) %>%
+  summarize(Sum.circumference = sum(circumference)) %>%
+  ggplot(aes(Tree, Sum.circumference, fill=Tree)) + 
+  geom_bar(stat='identity')
+```
+
+<img src="md-images/image-20210314210041295.png" alt="image-20210314210041295" style="zoom:50%;" />
+
+```R
+Orange %>%
+  group_by(Tree) %>%
+  summarize(Sum.circumference = sum(circumference)) %>%
+  ggplot(aes(Tree, Sum.circumference)) + 
+  geom_bar(stat='identity', fill=Tree) # Tree 변수 값을 찾을 수 없음
+# Error in layer(data = data, mapping = mapping, stat = stat, geom = GeomBar,  : 
+#                  객체 'Tree'를 찾을 수 없습니다
+```
+
+
+
+더 많은 옵션 사항은 [ggplot2정리.R](/R_code_file/ggplot2정리.R) 파일 참고
+
