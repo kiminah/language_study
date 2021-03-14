@@ -281,5 +281,5 @@ Orange %>%
 
 
 
-더 많은 옵션 사항은 [ggplot2정리.R](/R_code_file/ggplot2정리.R) 파일 참고
+더 많은 옵션 사항은 [ggplot2정리.R](./R/R_code_file/ggplot2정리.R) 파일 참고
 
