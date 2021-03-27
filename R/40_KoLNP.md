@@ -94,3 +94,150 @@ grep('\\D',st,value=T) # '\\D' : 숫자가 아닌 것
 # "123" "567"
 # "word list" "my list"   "word"
 ```
+
+
+
+---
+
+
+
+## 텍스트마이닝
+
+- 분석은/ 분석이/ 분석을 → 세 단어를 다르게 인식
+
+- 독립변수가 적으면 좋고 같은 의미의 단어는 줄여줘야 함
+
+  
+
+### extractNoun() : 명사만 추출
+
+```R
+extractNoun('롯데마트가 판매하고 있는 흑마늘 양념 치킨이 논란이 되고 있다')
+# "롯데마트" "판매"     "흑마늘"   "양념"     "치킨"     "논란"     "있" 
+```
+
+
+
+### SimplePos09() : 다양한 품사로 나누어줌
+
+```R
+SimplePos09('롯데마트가 판매하고 있는 흑마늘 양념 치킨이 논란이 되고 있다')
+# $판매하고
+# [1] "판매/N+하고/J" : 명사 + 관계언
+# $있는
+# [1] "있/P+는/E" : 용언 + 어미 ....
+```
+
+
+
+### MorphAnalyzer() : 품사를 다양한 경우의 수로 나누어줌
+
+```R
+MorphAnalyzer('롯데마트가 판매하고 있는 흑마늘 양념 치킨이 논란이 되고 있다')
+$롯데마트가
+[1] "롯데마트/ncn+가/jcc"            "롯데마트/ncn+가/jcs"           
+[3] "롯데마트/ncn+가/ncn"            "롯데마트/ncn+이/jp+가/ecc"     
+[5] "롯데/ncn+마트/ncn+가/jcc"       "롯데/ncn+마트/ncn+가/jcs"      
+[7] "롯데/ncn+마트/ncn+가/ncn"       "롯데/ncn+마트/ncn+이/jp+가/ecc"
+
+$판매하고
+ [1] "판매/ncpa+하고/jcj"             "판매/ncpa+하고/jct"            
+ [3] "판매/ncpa+하고/ncn"             "판매/ncpa+하고/jcs"            
+ [5] "판매/ncpa+하/xsva+고/ecc"       "판매/ncpa+하/xsva+고/ecs" ....
+```
+
+
+
+---
+
+
+
+## SimplePos09
+
+> 사용 데이터셋 → 리뷰가 담긴 데이터(comments)
+
+- 형태소 분리
+
+  ```R
+  # 빈 list를 하나 만들고 각 방에 결과 하나씩 저장
+  com_list <- list()
+  
+  # SimplePos09(comments)
+  # java 메모리 에러 날 수 있음
+  
+  ## 문장 덩어리가 너무 크거나, 기호문자가 들어가 있거나 하는 여러 이유로 형태소 분석 진행 안될 수 있다 (에러처리 해 줘야 함)
+  for(i in 1:length(sample_com)){
+    s_token <- SimplePos09(sample_com[i])
+    com_list[[i]] <- s_token
+    cat('\n', i) # 진행률을 보기 위함
+  }
+  ```
+
+- 예외 처리 : 에러 발생하면 NA 값으로 치환
+
+  ``` R
+  for(i in 1:length(sample_com)){
+    if(class(try(s_token <- SimplePos09(sample_com[i])))=='try-error'){
+      com_list[[i]] <- NA
+    }else{
+      com_list[[i]] <- s_token
+    }
+    cat('\n', i)
+  }
+  ```
+
+- 형태소 분리한 자료가 들은 data(com_list)의 unlist() 작업
+
+  ```R
+  com_list2 <- unlist(com_list)
+  ```
+
+- 형태소 분석
+
+  ```R
+  #------ 형태소 분석
+  # "오늘/N" : '오늘' 만 추출해야함
+  # "오니기리/N+와/J" : '오니기리'만 추출해야 함
+  ## sapply 사용
+  words <- sapply(str_split(com_list2,'/'), function(x){x[1]})
+  head(words)
+  ```
+
+- 형태소 빈도수 계산 : table()
+
+  ```R
+  cnt <- table(words)
+  cnt <- cnt[nchar(names(cnt))>1] # 한글자 단어 지움
+  
+  # 빈도수 큰 순서대로 정렬후 100개만 추출
+  sam_test <- sort(cnt, decreasing = T)[1:100]
+  sam_test
+  ```
+
+
+
+- 나눠진 형태소에서 명사만 추출하고 싶을 때 : N
+
+  ```R
+  test <- str_split(com_list2[1:10],'/')
+  
+  ## 명사 추출 함수
+  ## 아래 코드는 x[2]의 값이 N 인 것만 추출
+  sel_N <- function(x){
+    x[2]=='N'
+  }
+  sapply(test,sel_N)
+  
+  ## 실제 데이터는 "오니기리" "N+와" 이 형태일 수 있으므로 N+인 경우에도 추출 해야 함
+  ## str_detect() 사용
+  sel_N <- function(x){
+    if(str_detect(x[2],'N')){
+      x[1]
+    }else{}
+  }
+  words <- sapply(spl_data, sel_N)
+  words <- unlist(words)
+  ```
+
+  
+
